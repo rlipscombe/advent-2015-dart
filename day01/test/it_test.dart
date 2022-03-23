@@ -1,7 +1,8 @@
 import 'package:test/test.dart';
+import 'package:day01/day01.dart';
 
 void main() {
   test('it', () {
-    assert(false);
+    expect(day1('(())'), equals(0));
   });
 }
