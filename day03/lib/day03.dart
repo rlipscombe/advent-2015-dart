@@ -1,1 +1,3 @@
-// TODO Implement this library.
+int part1(input) {
+  return 0;
+}
