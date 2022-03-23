@@ -1,1 +1,1 @@
-A simple command-line application.
+Dart implementation of Advent of Code, 2015, day 1.
