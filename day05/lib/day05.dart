@@ -60,5 +60,39 @@ bool containsDoubleLetter(String s) {
 }
 
 bool isNiceString2(String s) {
+  // Now, a nice string is one with all of the following properties:
+  // - It contains a pair of any two letters that appears at least twice in the string without overlapping, like
+  //   xyxy (xy) or aabcdefgaa (aa), but not like aaa (aa, but it overlaps).
+  // - It contains at least one letter which repeats with exactly one letter between them, like xyx, abcdefeghi (efe),
+  //   or even aaa.
+
+  return containsNonOverlappingRepeatedPair(s) &&
+      containsRepeatedLetterWithSpacer(s);
+}
+
+bool containsNonOverlappingRepeatedPair(String s) {
+  // Rule 1:
+  // For each pair of letters in the string, look to see if that pair appears again in the string, starting from
+  // immediately _after_ the current pair.
+  // We could implement something like Elixir's chunk_every, but we also need the position, so let's just get into it.
+  for (var i = 0; i < s.length - 1; ++i) {
+    var pair = s[i] + s[i + 1];
+    if (s.contains(pair, i + 2)) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
+bool containsRepeatedLetterWithSpacer(String s) {
+  // Rule 2:
+  // For each letter in the string, does it occur 2 places further on?
+  for (var i = 0; i < s.length - 2; ++i) {
+    if (s[i] == s[i + 2]) {
+      return true;
+    }
+  }
+
   return false;
 }

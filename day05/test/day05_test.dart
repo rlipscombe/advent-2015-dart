@@ -20,4 +20,11 @@ void main() {
     assert(!isNiceString2('uurcxstgmygtbstg'));
     assert(!isNiceString2('ieodomkazucvgmuy'));
   });
+
+  test('containsNonOverlappingRepeatedPair', () {
+    assert(containsNonOverlappingRepeatedPair('xyxy'));
+    assert(containsNonOverlappingRepeatedPair('aabcdefgaa'));
+    assert(!containsNonOverlappingRepeatedPair('aaa'));
+    assert(containsNonOverlappingRepeatedPair('aaaa'));
+  });
 }
