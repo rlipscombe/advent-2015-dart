@@ -46,3 +46,9 @@ extension Actions on Grid<bool> {
     apply(x0, y0, x1, y1, (elt) => !elt);
   }
 }
+
+extension Summable on Grid<int> {
+  int sum() {
+    return fold<int>(0, (acc, elt) => acc + elt);
+  }
+}
