@@ -1,24 +1,12 @@
-class Grid {
-  final List<List<int>> _array;
+class Grid<E> {
+  final List<List<E>> _array;
 
-  Grid(int width, int height)
+  Grid(int width, int height, E init)
       : _array = List.generate(
-            height, (_) => List.filled(width, 0, growable: false),
+            height, (_) => List.filled(width, init, growable: false),
             growable: false);
 
-  void turnOn(int x0, int y0, int x1, int y1) {
-    _mutate(x0, y0, x1, y1, (_) => 1);
-  }
-
-  void turnOff(int x0, int y0, int x1, int y1) {
-    _mutate(x0, y0, x1, y1, (_) => 0);
-  }
-
-  void toggle(int x0, int y0, int x1, int y1) {
-    _mutate(x0, y0, x1, y1, (e) => (e != 0 ? 0 : 1));
-  }
-
-  void _mutate(int x0, int y0, int x1, int y1, int Function(int) cb) {
+  void apply(int x0, int y0, int x1, int y1, E Function(E) cb) {
     for (var x = x0; x <= x1; ++x) {
       for (var y = y0; y <= y1; ++y) {
         _array[x][y] = cb(_array[x][y]);
@@ -26,19 +14,35 @@ class Grid {
     }
   }
 
-  int count() {
-    return _array.fold2d(0, (acc, elt) => acc + elt);
-  }
-}
-
-extension Fold2d<E> on Iterable<Iterable<E>> {
-  U fold2d<U>(U init, U Function(U prev, E elt) folder) {
+  U fold<U>(U init, U Function(U prev, E elt) folder) {
     U result = init;
-    for (var row in this) {
+
+    for (var row in _array) {
       for (var elt in row) {
         result = folder(result, elt);
       }
     }
+
     return result;
+  }
+}
+
+extension Countable on Grid<bool> {
+  int count() {
+    return fold<int>(0, (acc, elt) => acc + (elt ? 1 : 0));
+  }
+}
+
+extension Actions on Grid<bool> {
+  void turnOn(int x0, int y0, int x1, int y1) {
+    apply(x0, y0, x1, y1, (_) => true);
+  }
+
+  void turnOff(int x0, int y0, int x1, int y1) {
+    apply(x0, y0, x1, y1, (_) => false);
+  }
+
+  void toggle(int x0, int y0, int x1, int y1) {
+    apply(x0, y0, x1, y1, (elt) => !elt);
   }
 }

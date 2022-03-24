@@ -5,7 +5,7 @@ import 'package:day06/day06.dart';
 void main(List<String> arguments) {
   var lines = File("input.txt").readAsLinesSync();
 
-  var grid = Grid(1000, 1000);
+  var grid = Grid(1000, 1000, false);
   var actions = lines.map(parseAction);
   for (var action in actions) {
     action(grid);
@@ -17,7 +17,7 @@ void main(List<String> arguments) {
 var _re =
     RegExp(r'^(turn off|turn on|toggle) (\d+),(\d+) through (\d+),(\d+)$');
 
-void Function(Grid) parseAction(String line) {
+void Function(Grid<bool>) parseAction(String line) {
   var match = _re.firstMatch(line);
   var action = match!.group(1);
   var x0 = int.parse(match.group(2)!);
