@@ -58,3 +58,7 @@ bool containsDoubleLetter(String s) {
 
   return false;
 }
+
+bool isNiceString2(String s) {
+  return false;
+}

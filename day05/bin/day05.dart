@@ -10,6 +10,8 @@ extension Functional<E> on Iterable<E> {
 
 void main(List<String> arguments) {
   var lines = File('input.txt').readAsLinesSync();
-  int count = lines.count(isNiceString);
-  print("part 1: $count");
+  int part1 = lines.count(isNiceString);
+  print("part 1: $part1");
+  int part2 = lines.count(isNiceString2);
+  print("part 2: $part2");
 }

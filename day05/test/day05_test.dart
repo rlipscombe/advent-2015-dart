@@ -13,4 +13,11 @@ void main() {
   test('contains banned string', () {
     assert(containsBannedStrings('haegwjzuvuyypxyu'));
   });
+
+  test('part 2 examples', () {
+    assert(isNiceString2('qjhvhtzxzqqjkmpb'));
+    assert(isNiceString2('xxyxx'));
+    assert(!isNiceString2('uurcxstgmygtbstg'));
+    assert(!isNiceString2('ieodomkazucvgmuy'));
+  });
 }
