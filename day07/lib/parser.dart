@@ -10,7 +10,8 @@ class LogicDefinition extends GrammarDefinition {
           .map((values) => Instr(values[0], values[2]));
 
   Parser<Expr> expression() =>
-      (and() | or() | rshift() | lshift() | not() | number()).cast<Expr>();
+      (and() | or() | rshift() | lshift() | not() | id() | number())
+          .cast<Expr>();
 
   Parser<NotExpr> not() => unary('NOT', (source) => NotExpr(source));
 

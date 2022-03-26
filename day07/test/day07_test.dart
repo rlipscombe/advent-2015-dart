@@ -43,6 +43,13 @@ void main() {
       expect(
           parser.parse('456 -> y').value, equals(Instr(LiteralExpr(456), 'y')));
     });
+
+    test('assign', () {
+      var definition = LogicDefinition();
+      var parser = definition.build();
+      expect(
+          parser.parse('lx -> a').value, equals(Instr(LookupExpr('lx'), 'a')));
+    });
   });
 
   group('for example', () {
