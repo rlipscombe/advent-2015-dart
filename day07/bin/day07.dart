@@ -10,11 +10,17 @@ void main(List<String> arguments) {
   var parser = definition.build();
 
   var instructions = lines.map<Instr>((String line) {
-    print(line);
     return parser.parse(line).value;
   });
 
   var context = Context(instructions);
 
-  print('part 1: ${context.evaluate('a')}');
+  var part1 = context.evaluate('a');
+  print('part 1: $part1');
+
+  var context2 = Context(instructions);
+  context2.replace('b', part1);
+
+  var part2 = context2.evaluate('a');
+  print('part 2: $part2');
 }
